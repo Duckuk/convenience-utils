@@ -2,6 +2,7 @@
 name = "tar-zstd-compress"
 version = "0.1.0"
 edition = "2021"
+license = "LGPL-3.0-or-later"
 
 [dependencies]
 xflags = "0.3.2"
