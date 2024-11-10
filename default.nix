@@ -17,4 +17,12 @@ pkgs.rustPlatform.buildRustPackage rec {
   cargoLock.lockFile = ./Cargo.lock;
 
   src = lib.cleanSource ./.;
+
+  meta = with lib; {
+    homepage = "https://github.com/Duckuk/tar-zstd-compress";
+    description = "Simple wrapper around tar and zstd for convenience in compressing folders.";
+    license = getLicenseFromSpdxId "LGPL-3.0-or-later";
+    mainProgram = "tar-zstd-compress";
+    platforms = lib.platforms.linux;
+  };
 }
