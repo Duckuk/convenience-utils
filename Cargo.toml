@@ -6,3 +6,8 @@ license = "LGPL-3.0-or-later"
 
 [dependencies]
 xflags = "0.3.2"
+
+[profile.release]
+lto = true
+strip = true
+codegen-units = 1
