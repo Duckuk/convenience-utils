@@ -24,5 +24,11 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: release
-        path: target/release/tar-zstd-compress
+        path: |
+          target/release/
+          !target/release/*.d
+          !target/release/*.rlib
+          !target/release/deps/
+          !target/release/build/
+          !target/release/incremental/
       
