@@ -28,6 +28,7 @@ jobs:
           target/release/
           !target/release/*.d
           !target/release/*.rlib
+          !target/release/*.pdb
           !target/release/deps/
           !target/release/build/
           !target/release/incremental/
