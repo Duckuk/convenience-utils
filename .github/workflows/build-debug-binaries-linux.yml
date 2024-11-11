@@ -1,4 +1,4 @@
-name: Rust
+name: Build debug binaries (Linux)
 
 on:
   push:
@@ -17,9 +17,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build release
-      run: cargo build --release --verbose
+      run: cargo build --profile dev --verbose
     - name: Run release tests release
-      run: cargo test --release --verbose
+      run: cargo test --profile dev --verbose
     - name: Upload binary
       uses: actions/upload-artifact@v4
       with:
