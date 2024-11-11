@@ -1,5 +1,7 @@
 use std::process::Command;
 
+use convenience_utils::check_dependencies;
+
 mod flags {
     use std::path::PathBuf;
     xflags::xflags! {
@@ -23,6 +25,8 @@ mod flags {
 }
 
 fn main() {
+    check_dependencies(&["ffmpeg"]);
+
     let args = match flags::Vp9Compress::from_env() {
         Ok(flags) => flags,
         Err(err) => err.exit()

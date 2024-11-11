@@ -13,8 +13,10 @@ mod flags {
     }
 }
 
-use convenience_utils::create_awk_with_pipe;
+use convenience_utils::{check_dependencies, create_awk_with_pipe};
 fn main() {
+    check_dependencies(&["tar", "zstd"]);
+
     let args = match flags::TarZstdCompress::from_env() {
         Ok(flags) => flags,
         Err(err) => err.exit()
