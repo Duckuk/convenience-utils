@@ -52,6 +52,4 @@ fn main() {
         .expect("zstd failed!");
 
     zstd.wait().expect("Failed waiting!");
-
-    println!("Hello, world!");
 }
