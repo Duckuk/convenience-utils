@@ -14,6 +14,7 @@ mod flags {
     }
 }
 
+use convenience_utils::create_awk_with_pipe;
 fn main() {
     let args = match flags::TarZstdCompress::from_env() {
         Ok(flags) => flags,
@@ -33,23 +34,31 @@ fn main() {
 
     let tar = Command::new("tar")
         .stdout(Stdio::piped())
-        .arg("-cv")
-        .arg("-O")
+        .stderr(Stdio::piped())
+        .arg("-cvO")
         .args(inputs)
         .spawn()
         .expect("Tar failed!");
 
-    let tar_out = tar.stdout.expect("Failed to get tar output!");
+    let tar_err = tar.stderr.expect("Failed to get tar stderr!");
+    let tar_awk = create_awk_with_pipe(tar_err, "tar: ");
 
+    let tar_out = tar.stdout.expect("Failed to get tar stdout!");
+
+    let compression_level_arg = format!("-{compression_level}");
     let mut zstd = Command::new("zstd")
         .stdin(Stdio::from(tar_out))
-        .arg("-T0")
-        .arg("--long")
-        .arg(format!("-{compression_level}"))
-        .arg("-o")
-        .arg(output)
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped())
+        .args(["-T0", "--long", &compression_level_arg])
+        .args(["-o", &output.to_string_lossy()])
         .spawn()
         .expect("zstd failed!");
+
+    let zstd_out = zstd.stdout.take().expect("Failed to get zstd stdout!");
+    let zstd_err = zstd.stderr.take().expect("Failed to get zstd stdout!");
+    let zstd_out_awk = create_awk_with_pipe(zstd_out, "zstd: ");
+    let zstd_err_awk = create_awk_with_pipe(zstd_err, "zstd: ");
 
     zstd.wait().expect("Failed waiting!");
 }
