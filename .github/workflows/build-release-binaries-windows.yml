@@ -20,13 +20,6 @@ jobs:
       run: cargo build --release --verbose
     - name: Run tests
       run: cargo test --release --verbose
-    - name: Compress binaries
-      uses: crazy-max/ghaction-upx@v3
-      with:
-        version: latest
-        files: |
-          target/release/*.exe
-        args: --lzma --best
     - name: Upload binary
       uses: actions/upload-artifact@v4
       with:
