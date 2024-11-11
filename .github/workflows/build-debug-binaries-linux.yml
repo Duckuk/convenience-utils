@@ -25,10 +25,10 @@ jobs:
       with:
         name: debug
         path: |
-          target/release/
-          !target/release/*.d
-          !target/release/*.rlib
-          !target/release/deps/
-          !target/release/build/
-          !target/release/incremental/
+          target/debug/
+          !target/debug/*.d
+          !target/debug/*.rlib
+          !target/debug/deps/
+          !target/debug/build/
+          !target/debug/incremental/
       
