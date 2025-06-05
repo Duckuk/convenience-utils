@@ -32,6 +32,8 @@
             program = "${self.packages.${system}.convenience-utils}/bin/vp9-compress";
           };
         };
+
+        overlays.default = import ./nix/overlay.nix;
       }
     );
 }
