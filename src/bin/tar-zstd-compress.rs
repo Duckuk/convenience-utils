@@ -42,6 +42,7 @@ fn main() {
         .expect("Tar failed!");
 
     let tar_err = tar.stderr.expect("Failed to get tar stderr!");
+    #[expect(unused_variables)]
     let tar_awk = create_awk_with_pipe(tar_err, "tar: ");
 
     let tar_out = tar.stdout.expect("Failed to get tar stdout!");
@@ -58,7 +59,9 @@ fn main() {
 
     let zstd_out = zstd.stdout.take().expect("Failed to get zstd stdout!");
     let zstd_err = zstd.stderr.take().expect("Failed to get zstd stdout!");
+    #[expect(unused_variables)]
     let zstd_out_awk = create_awk_with_pipe(zstd_out, "zstd: ");
+    #[expect(unused_variables)]
     let zstd_err_awk = create_awk_with_pipe(zstd_err, "zstd: ");
 
     zstd.wait().expect("Failed waiting!");
