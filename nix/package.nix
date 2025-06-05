@@ -21,12 +21,12 @@ pkgs.rustPlatform.buildRustPackage rec {
   src = fetchFromGitHub {
     owner = "Duckuk";
     repo = "convenience-utils";
-    rev = "3a141e88d99e7f00708e6e899f1ee396166eb8a6";
-    hash = "sha256-/0SKUsb+U1tVUUZ7HK+3GmW11F2mLVUUoSLKexHSnaY=";
+    rev = "21dfb71cc4b07627b6e266dcc05a8a103f41fe77";
+    hash = "sha256-YUeyQf1c83L/WPPlX6EsrTgvjg8S8l8+FuBziTA7Ud0=";
   };
 
   useFetchCargoVendor = true;
-  cargoHash = "sha256-UKTX40vRxpMK9UUfBCzU8C1A7iYfoalXhopxyl3w3qI=";
+  cargoHash = "sha256-a2Bx3t8W3JDjaA0fJIxYzCB8k/1DXD4b43uQfu8WmQQ=";
 
   postFixup = let
     tar = pkgs.gnutar;
