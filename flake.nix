@@ -11,7 +11,7 @@
     nixpkgs,
     flake-utils,
   }:
-    flake-utils.lib.eachDefaultSystem (
+    (flake-utils.lib.eachDefaultSystem (
       system: let
         pkgs = nixpkgs.legacyPackages.${system};
         lib = pkgs.lib;
@@ -32,8 +32,8 @@
             program = "${self.packages.${system}.convenience-utils}/bin/vp9-compress";
           };
         };
-
-        overlays.default = import ./nix/overlay.nix;
       }
-    );
+    )) // {
+      overlays.default = import ./nix/overlay.nix;
+    };
 }
